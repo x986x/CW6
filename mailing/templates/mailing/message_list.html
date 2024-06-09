@@ -1,0 +1,26 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2>Message List</h2>
+
+        {% if user.is_authenticated %}
+            <div class="col-12 mb-3">
+                <a class="btn btn-outline-primary" href="{% url 'mailing:create_message' mailing_pk=mailing_pk %}">Add
+                    New Message</a>
+            </div>
+        {% endif %}
+
+        <ul>
+            {% for message in messages %}
+                <li>{{ message.subject }} ({{ message.body }})
+
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'mailing:update_message' mailing_pk=message.mailing.pk pk=message.pk %}">Edit</a>
+                        <a href="{% url 'mailing:delete_message' mailing_pk=message.mailing.pk pk=message.pk %}">Delete</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

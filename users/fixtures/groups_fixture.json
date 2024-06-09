@@ -1,0 +1,38 @@
+[
+{
+    "model": "auth.group",
+    "pk": 1,
+    "fields": {
+        "name": "Users",
+        "permissions": [
+            33,
+            34,
+            35,
+            36,
+            41,
+            50,
+            49,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48
+        ]
+    }
+},
+{
+    "model": "auth.group",
+    "pk": 4,
+    "fields": {
+        "name": "Managers",
+        "permissions": [
+            36,
+            50,
+            49,
+            44
+        ]
+    }
+}
+]

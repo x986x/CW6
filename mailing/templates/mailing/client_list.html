@@ -1,0 +1,29 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+
+<h2>Client List</h2>
+{% if user.is_authenticated %}
+    <div class="col-12 mb-5">
+        <a class="btn btn-outline-primary" href="{% url 'mailing:create_client' %}">Добавить запись</a>
+    </div>
+{% endif %}
+<ul>
+    {% for client in clients %}
+        <li>{{ client.full_name }} ({{ client.email }})
+            <a class="btn btn-primary btn-sm" href="{% url 'mailing:update_client' client.pk %}">Редактировать</a>
+            {% if is_admin or is_manager %}
+                <form method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="client_id" value="{{ client.pk }}">
+                    {% if client.is_active %}
+                        <button type="submit" name="action" value="deactivate" class="btn btn-warning btn-sm">Забанить</button>
+                    {% else %}
+                        <button type="submit" name="action" value="activate" class="btn btn-success btn-sm">Разбанить</button>
+                    {% endif %}
+                </form>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
